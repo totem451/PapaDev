@@ -38,8 +38,17 @@ class _PapaDevAppState extends State<PapaDevApp> {
 
 class HomePage extends StatelessWidget {
   final VoidCallback toggleTheme;
+  final ScrollController _scrollController = ScrollController();
 
   HomePage({super.key, required this.toggleTheme});
+
+  void _scrollToLastSection() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +91,12 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
-            HeaderSection(),
+            HeaderSection(
+              onRequestBudget: _scrollToLastSection,
+            ),
             ServicesSection(),
             PortfolioSection(),
             TestimonialsSection(),
@@ -98,8 +110,10 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  VoidCallback onRequestBudget;
+  HeaderSection({super.key, required this.onRequestBudget});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +146,7 @@ class HeaderSection extends StatelessWidget {
             ),
             SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: onRequestBudget,
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 backgroundColor: Colors.white,
