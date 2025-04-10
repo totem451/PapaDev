@@ -5,6 +5,8 @@ void main() {
 }
 
 class PapaDevApp extends StatefulWidget {
+  const PapaDevApp({super.key});
+
   @override
   _PapaDevAppState createState() => _PapaDevAppState();
 }
@@ -37,19 +39,45 @@ class _PapaDevAppState extends State<PapaDevApp> {
 class HomePage extends StatelessWidget {
   final VoidCallback toggleTheme;
 
-  HomePage({required this.toggleTheme});
+  HomePage({super.key, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PapaDev'),
+        title: Row(
+          children: [
+            ClipOval(
+              child: Image.asset(
+                'assets/images/logo.png',
+                height: 40, // Ajusta el tamaño si lo necesitas
+                width: 40, // Ajusta el tamaño si lo necesitas
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(width: 10), // Espacio entre el logo y el título
+            Text(
+              'PapaDev', // Título o nombre de la página
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
         actions: [
-          Switch(
-            value: MediaQuery.of(context).platformBrightness == Brightness.dark,
-            onChanged: (value) {
-              toggleTheme();
-            },
+          Row(
+            children: [
+              Icon(Icons.dark_mode),
+              SizedBox(width: 10),
+              Switch(
+                activeColor: Colors.lightBlueAccent,
+                inactiveThumbColor: Colors.brown.shade700,
+                inactiveTrackColor: Colors.grey,
+                value: MediaQuery.of(context).platformBrightness ==
+                    Brightness.dark,
+                onChanged: (value) {
+                  toggleTheme();
+                },
+              ),
+            ],
           ),
         ],
       ),
@@ -71,6 +99,8 @@ class HomePage extends StatelessWidget {
 }
 
 class HeaderSection extends StatelessWidget {
+  const HeaderSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -118,6 +148,8 @@ class HeaderSection extends StatelessWidget {
 }
 
 class AboutMeSection extends StatelessWidget {
+  const AboutMeSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -131,12 +163,13 @@ class AboutMeSection extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Text(
-            '¡Hola! Soy [Tu Nombre], desarrollador apasionado por crear soluciones tecnológicas que marquen una diferencia. Con más de [X años] de experiencia en desarrollo de aplicaciones móviles, páginas web y sistemas empresariales, mi objetivo es ayudar a empresas y emprendedores a transformar sus ideas en productos digitales de calidad.',
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Mi historia comenzó [aquí puedes incluir tu historia]. Siempre he estado interesado en [detalles sobre tu vida y tu motivación].',
+            '''Hola, soy Tomás, pero mis amigos y familia me llaman Papa, y esa es la inspiración detrás de PapaDev. Soy programador desde hace 7 años y, durante 12 años, he estado desarrollando mi pasión por la tecnología. Comencé mi formación en un colegio técnico en Córdoba, Argentina, y luego continué mis estudios en la Universidad Tecnológica Nacional, donde me gradué en Ingeniería en Sistemas.
+
+A lo largo de mi carrera, he trabajado con una amplia variedad de tecnologías, lo que me ha permitido adquirir una sólida base técnica. Lo que más disfruto es afrontar nuevos desafíos y encontrar soluciones innovadoras a problemas complejos. Siempre estoy buscando formas de mejorar y evolucionar, adaptándome a las tendencias emergentes en el mundo digital.
+
+El logo de PapaDev refleja mi heterocromía, un ojo marrón y el otro celeste, y representa cómo combino lo técnico con un toque personal.
+
+Cada proyecto es una nueva oportunidad para aprender y seguir creciendo. Mi objetivo es ofrecer soluciones digitales que no solo sean funcionales, sino también eficientes, escalables y, por supuesto, con un toque de creatividad.''',
             style: TextStyle(fontSize: 16),
           ),
         ],
@@ -163,6 +196,8 @@ class ServicesSection extends StatelessWidget {
           'Automatización de procesos internos de empresas con soluciones personalizadas que aumentan la productividad.',
     },
   ];
+
+  ServicesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +232,7 @@ class ServiceCard extends StatelessWidget {
   final String description;
 
   const ServiceCard({
+    super.key,
     required this.title,
     required this.description,
   });
@@ -231,6 +267,8 @@ class PortfolioSection extends StatelessWidget {
     {'title': 'Sistema Desktop', 'image': 'assets/desktop_system.png'},
   ];
 
+  PortfolioSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -264,6 +302,7 @@ class PortfolioCard extends StatelessWidget {
   final String imagePath;
 
   const PortfolioCard({
+    super.key,
     required this.title,
     required this.imagePath,
   });
@@ -310,6 +349,8 @@ class TestimonialsSection extends StatelessWidget {
     },
   ];
 
+  TestimonialsSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -343,6 +384,7 @@ class TestimonialCard extends StatelessWidget {
   final String testimonial;
 
   const TestimonialCard({
+    super.key,
     required this.name,
     required this.testimonial,
   });
@@ -371,6 +413,8 @@ class TestimonialCard extends StatelessWidget {
 }
 
 class ContactSection extends StatelessWidget {
+  const ContactSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -408,6 +452,10 @@ class ContactSection extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightBlueAccent,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () {},
                   child: Text('Enviar'),
                 ),
@@ -421,6 +469,8 @@ class ContactSection extends StatelessWidget {
 }
 
 class FooterSection extends StatelessWidget {
+  const FooterSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
