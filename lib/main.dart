@@ -1,6 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(PapaDevApp());
 }
 
@@ -97,11 +100,17 @@ class HomePage extends StatelessWidget {
             HeaderSection(
               onRequestBudget: _scrollToLastSection,
             ),
-            ServicesSection(),
-            PortfolioSection(),
-            TestimonialsSection(),
+            SizedBox(height: 20),
             AboutMeSection(),
+            SizedBox(height: 20),
+            ServicesSection(),
+            SizedBox(height: 20),
+            PortfolioSection(),
+            SizedBox(height: 20),
+            TestimonialsSection(),
+            SizedBox(height: 20),
             ContactSection(),
+            SizedBox(height: 20),
             FooterSection(),
           ],
         ),
@@ -148,9 +157,10 @@ class HeaderSection extends StatelessWidget {
             ElevatedButton(
               onPressed: onRequestBudget,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.brown.shade700,
+                textStyle: TextStyle(fontSize: 22),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 22),
+                backgroundColor: Colors.brown.shade700,
+                foregroundColor: Colors.white,
               ),
               child: Text('Solicita un presupuesto'),
             ),
@@ -167,9 +177,9 @@ class AboutMeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.fromLTRB(100, 80, 100, 60),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'Sobre Mí',
@@ -275,10 +285,30 @@ class ServiceCard extends StatelessWidget {
 }
 
 class PortfolioSection extends StatelessWidget {
-  final List<Map<String, String>> projects = [
-    {'title': 'Aplicación Móvil', 'image': 'assets/mobile_app.png'},
-    {'title': 'Página Web', 'image': 'assets/website.png'},
-    {'title': 'Sistema Desktop', 'image': 'assets/desktop_system.png'},
+  final List<Map<String, dynamic>> projects = [
+    {
+      'title': 'Aplicación Móvil',
+      'images': [
+        'assets/images/IMG_4898.png',
+        'assets/images/IMG_4899.png',
+        'assets/images/IMG_4901.png',
+        'assets/images/IMG_4902.png',
+        'assets/images/IMG_4903.png',
+        'assets/images/IMG_4900.png',
+      ],
+    },
+    {
+      'title': 'Página Web',
+      'images': [
+        'assets/images/IMG_4905.png',
+      ],
+    },
+    {
+      'title': 'Sistema Desktop',
+      'images': [
+        'assets/images/IMG_4904.png',
+      ],
+    },
   ];
 
   PortfolioSection({super.key});
@@ -286,14 +316,14 @@ class PortfolioSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
+      padding: const EdgeInsets.symmetric(vertical: 60),
       child: Column(
         children: [
           Text(
             'Portafolio',
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 60),
           Wrap(
             spacing: 20,
             runSpacing: 20,
@@ -301,7 +331,7 @@ class PortfolioSection extends StatelessWidget {
             children: projects.map((project) {
               return PortfolioCard(
                 title: project['title']!,
-                imagePath: project['image']!,
+                images: List<String>.from(project['images']!),
               );
             }).toList(),
           ),
@@ -313,34 +343,73 @@ class PortfolioSection extends StatelessWidget {
 
 class PortfolioCard extends StatelessWidget {
   final String title;
-  final String imagePath;
+  final List<String> images;
 
   const PortfolioCard({
     super.key,
     required this.title,
-    required this.imagePath,
+    required this.images,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Definir el ancho dependiendo del título
+    double width = (title == 'Aplicación Móvil') ? 300 : 1000;
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center, // Centrar contenido
       children: [
-        Container(
-          width: 300,
-          height: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            image: DecorationImage(
-              image: AssetImage(imagePath),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        SizedBox(height: 10),
         Text(
           title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center, // Centrar texto del título
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
+        SizedBox(height: 10),
+        // Si el título no es 'Aplicación Móvil', desactivamos el scroll
+        title == 'Aplicación Móvil'
+            ? SizedBox(
+                height: 500, // Tamaño fijo
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      // Centrar cada imagen
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 40),
+                        child: Container(
+                          constraints: BoxConstraints(
+                            maxWidth: width, // El ancho cambia según el título
+                          ),
+                          child: Image.asset(
+                            images[index],
+                            fit: BoxFit
+                                .contain, // Ajustar la imagen manteniendo la proporción
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            : Column(
+                children: images.map((image) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: width, // El ancho cambia según el título
+                      ),
+                      child: Image.asset(
+                        image,
+                        fit: BoxFit
+                            .contain, // Ajustar la imagen manteniendo la proporción
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
       ],
     );
   }
@@ -368,7 +437,7 @@ class TestimonialsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.all(60),
       child: Column(
         children: [
           Text(
@@ -432,7 +501,7 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.fromLTRB(100, 60, 100, 60),
       child: Column(
         children: [
           Text(
