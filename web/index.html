@@ -17,7 +17,52 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatib<!DOCTYPE html>
+  <html>
+  <head>
+    <base href="$FLUTTER_BASE_HREF">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A new Flutter project.">
+  
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PapaDev">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+  
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+  
+    <title>PapaDev</title>
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <script src="flutter.js" defer></script>
+    <script src="flutter_service_worker.js" defer></script>
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCkwGI_bTwjbnMCjiJinQQ1WBaaefWJN4Y",
+        authDomain: "papadev-51937.firebaseapp.com",
+        projectId: "papadev-51937",
+        storageBucket: "papadev-51937.firebasestorage.app",
+        messagingSenderId: "747267212762",
+        appId: "1:747267212762:web:c612396e570c07f1a96ce3",
+        measurementId: "G-WXCEBW51HW"
+      };
+  
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+  </body>
+  </html>le">
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
