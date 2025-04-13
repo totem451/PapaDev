@@ -178,7 +178,7 @@ class AboutMeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 80, 100, 60),
+      padding: const EdgeInsets.fromLTRB(60, 80, 60, 60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -296,6 +296,17 @@ class PortfolioSection extends StatelessWidget {
         'assets/images/IMG_4902.png',
         'assets/images/IMG_4903.png',
         'assets/images/IMG_4900.png',
+        'assets/images/IMG_4944.png',
+        'assets/images/IMG_4945.png',
+        'assets/images/IMG_4946.png',
+        'assets/images/IMG_4947.png',
+        'assets/images/IMG_4948.png',
+        'assets/images/IMG_4949.png',
+        'assets/images/IMG_4950.png',
+        'assets/images/IMG_4951.png',
+        'assets/images/IMG_4952.png',
+        'assets/images/IMG_4953.png',
+        'assets/images/IMG_4954.png',
       ],
     },
     {
@@ -502,7 +513,7 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 60, 100, 60),
+      padding: const EdgeInsets.fromLTRB(60, 60, 60, 60),
       child: Column(
         children: [
           Text(
